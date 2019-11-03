@@ -2,14 +2,16 @@
 
 {
   imports = [
-    ./local.nix; # See local.example.nix
+    ./local.nix # See local.example.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   }; 
 
   i18n = {
