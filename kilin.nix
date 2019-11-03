@@ -36,6 +36,8 @@
     opengl.driSupport32Bit = true;
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 

@@ -31,7 +31,6 @@
 
     layout = "fr";
     xkbOptions = "eurosign:e";
-    videoDrivers = [ "nvidia" ];
 
     libinput.enable = true;
 
