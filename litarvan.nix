@@ -4,7 +4,7 @@
   description = "Adrien Navratil";
   isNormalUser = true;
   createHome = true;
-  extraGroups = [ "wheel" ];
+  extraGroups = [ "wheel" "adbusers" ];
   shell = pkgs.fish;
 }
 
