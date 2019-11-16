@@ -3,6 +3,7 @@
 {
   imports = [
     ./local.nix # See local.example.nix
+    ./arangodb.nix
   ];
 
   boot = {
@@ -53,6 +54,8 @@
   users.extraGroups.vboxusers.members = [ "litarvan" ];
 
   users.users.litarvan = import ./litarvan.nix { inherit pkgs; };
+
+  services.arangodb.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 }
