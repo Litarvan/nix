@@ -4,7 +4,7 @@
   description = "Adrien Navratil";
   isNormalUser = true;
   createHome = true;
-  extraGroups = [ "wheel" "adbusers" "docker" ];
+  extraGroups = [ "wheel" "adbusers" "docker" "arangodb" ];
   shell = pkgs.fish;
 }
 
