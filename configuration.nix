@@ -3,29 +3,22 @@
 {
   imports = [
     ./local.nix # See local.example.nix
+    ./arangodb.nix
   ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  }; 
-
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "fr";
-    defaultLocale = "fr_FR.UTF-8";
+  console = {
+    keyMap = "fr";
+    font = "Lat2-Terminus16";
   };
 
+  i18n.defaultLocale = "fr_FR.UTF-8";
   time.timeZone = "Europe/Paris";
 
   services.printing.enable = true;
   sound.enable = true;
 
-  # TODO: Move that section home ?
   services.xserver = {
     enable = true;
 
@@ -35,23 +28,31 @@
     libinput.enable = true;
 
     displayManager.lightdm.enable = true;
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-    };
   };
 
+  services.geoclue2.enable = true;
+  services.arangodb.enable = true;
+
   programs = {
-    fish.enable = true; # TODO: Is this needed ? Move to home maybe
+    fish.enable = true;
     adb.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ git ];
+  environment.systemPackages = with pkgs; [ git firefox plasma-browser-integration ];
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "litarvan" ];
+  virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
 
-  users.users.litarvan = import ./litarvan.nix { inherit pkgs; };
+  users = {
+    users.litarvan = import ./litarvan.nix { inherit pkgs; };
+    extraGroups.vboxusers.members = [ "litarvan" ];
+  };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    firefox.enablePlasmaBrowserIntegration = true;
+  };
 }

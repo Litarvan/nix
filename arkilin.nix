@@ -13,9 +13,23 @@
 
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [];
+
+    loader = {
+      efi.efiSysMountPoint = "/boot";
+
+      grub = {
+          enable = true;
+          efiSupport = true;
+          efiInstallAsRemovable = true;
+          device = "nodev";
+      };
+    };
   };
 
-  networking.hostName = "arkilin";
+  networking = {
+    hostName = "arkilin";
+    wireless.enable = true;
+  };
 
   hardware = {
     pulseaudio = {
@@ -27,7 +41,10 @@
     opengl.driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    desktopManager.plasma5.enable = true;
+    videoDrivers = [ "amdgpu" ];
+  };
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -43,10 +60,4 @@
       fsType = "vfat";
     };
   };
-
-  swapDevices = [
-    {
-      device = "/dev/disk/by-uuid/96921fe0-2e7c-42d3-b9bc-a7db75399a94";
-    }
-  ];
 }

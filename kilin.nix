@@ -13,6 +13,11 @@
 
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [];
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   networking.hostName = "kilin";
@@ -36,7 +41,14 @@
     opengl.driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
+
+    videoDrivers = [ "nvidia" ];
+  };
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
