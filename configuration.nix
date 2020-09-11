@@ -38,7 +38,7 @@
     adb.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ git firefox plasma-browser-integration ];
+  environment.systemPackages = with pkgs; [ git firefox ];
 
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host = {
@@ -51,8 +51,5 @@
     extraGroups.vboxusers.members = [ "litarvan" ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    firefox.enablePlasmaBrowserIntegration = true;
-  };
+  nixpkgs.config.allowUnfree = true;
 }
