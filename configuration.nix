@@ -41,10 +41,7 @@
   environment.systemPackages = with pkgs; [ git firefox plasma-browser-integration ];
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
+  virtualisation.virtualbox.host.enable = true;
 
   users = {
     users.litarvan = import ./litarvan.nix { inherit pkgs; };
