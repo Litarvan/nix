@@ -60,4 +60,8 @@
       fsType = "vfat";
     };
   };
+
+
+  nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
+  environment.systemPackages = with pkgs; [ plasma-browser-integration ];
 }
