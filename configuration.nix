@@ -36,6 +36,7 @@
   programs = {
     fish.enable = true;
     adb.enable = true;
+    steam.enable = true;
   };
 
   environment.systemPackages = with pkgs; [ git firefox plasma-browser-integration ];

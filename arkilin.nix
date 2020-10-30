@@ -35,10 +35,10 @@
     pulseaudio = {
       enable = true;
       package = pkgs.pulseaudioFull;
-      support32Bit = true;
     };
 
-    opengl.driSupport32Bit = true;
+    opengl.extraPackages = with pkgs; [ amdvlk ];
+    video.hidpi.enable = true;
   };
 
   services.xserver = {
