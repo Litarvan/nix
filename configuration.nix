@@ -42,11 +42,11 @@
   environment.systemPackages = with pkgs; [ git firefox ];
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
 
   users = {
     users.litarvan = import ./litarvan.nix { inherit pkgs; };
-    extraGroups.vboxusers.members = [ "litarvan" ];
+    # extraGroups.vboxusers.members = [ "litarvan" ];
   };
 
   nixpkgs.config.allowUnfree = true;
