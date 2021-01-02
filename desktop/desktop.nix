@@ -6,6 +6,8 @@
     ../arangodb.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   services.printing.enable = true;
   sound.enable = true;
 
@@ -34,4 +36,6 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
+
+  users.users.litarvan.extraGroups = [ "adbusers" "arangodb" "vboxusers" ];
 }

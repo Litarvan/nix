@@ -5,8 +5,6 @@
     ./local.nix # See local.example.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   console = {
     keyMap = "fr";
     font = "Lat2-Terminus16";
