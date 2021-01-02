@@ -1,7 +1,7 @@
 { lib, modulesPath, ... }:
 
 {
-  imports = [ ./ ];
+  imports = [ ./server.nix ];
 
   boot.loader.grub.device = "/dev/vda";
 

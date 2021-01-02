@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 
 {
-  imports = [ ./ ];
+  imports = [ ./desktop.nix ];
 
   boot = {
     initrd = {
