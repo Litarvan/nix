@@ -3,7 +3,7 @@
 {
   imports = [
     (modulesPath + "installer/scan/not-detected.nix")
-    ../arangodb.nix
+    ../services/arangodb.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
