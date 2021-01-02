@@ -1,4 +1,4 @@
-{ lib, modulesPath, ... }:
+{ ... }:
 
 {
   imports = [ ./server.nix ];
