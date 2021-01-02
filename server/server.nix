@@ -22,6 +22,13 @@
       nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
   };
 
+  services.openssh = {
+    enable = true;
+    ports = [ 18982 ];
+    permitRootLogin = "no";
+    passwordAuthentication = false;
+  };
+
   environment = {
     memoryAllocator.provider = "graphene-hardened";
     noXlibs = true;
