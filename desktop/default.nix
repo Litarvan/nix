@@ -33,7 +33,5 @@
     steam.enable = true;
   };
 
-  # TODO: Fix broken with last kernel
-  # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ "litarvan" ];
+  virtualisation.virtualbox.host.enable = true;
 }
