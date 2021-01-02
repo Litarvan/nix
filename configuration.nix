@@ -18,7 +18,7 @@
   programs.fish.enable = true;
   virtualisation.docker.enable = true;
 
-  environment.systemPackages = with pkgs; [ git ];
+  environment.systemPackages = with pkgs; [ vim git ];
 
   nixpkgs.config.allowUnfree = true;
 }

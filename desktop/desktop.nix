@@ -8,27 +8,29 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  services.printing.enable = true;
   sound.enable = true;
-
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
   };
 
-  services.xserver = {
-    enable = true;
+  services = {
+    printing.enable = true;
 
-    layout = "fr";
-    xkbOptions = "eurosign:e";
+    xserver = {
+      enable = true;
 
-    libinput.enable = true;
+      layout = "fr";
+      xkbOptions = "eurosign:e";
 
-    displayManager.lightdm.enable = true;
+      libinput.enable = true;
+
+      displayManager.lightdm.enable = true;
+    };
+
+    geoclue2.enable = true;
+    arangodb.enable = true;
   };
-
-  services.geoclue2.enable = true;
-  services.arangodb.enable = true;
 
   programs = {
     adb.enable = true;
@@ -36,6 +38,7 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
+
   environment.systemPackages = with pkgs; [ firefox ];
 
   users.users.litarvan.extraGroups = [ "adbusers" "arangodb" "vboxusers" ];

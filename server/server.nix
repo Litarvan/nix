@@ -10,6 +10,7 @@
     loader.grub.splashImage = null;
 
     kernelPackages = pkgs.linuxPackages_latest_hardened;
+    kernelModules = [ "xt_nat" ];
     kernelParams = [ "panic=1" "boot.panic_on_fail" ];
 
     vesa = false;
