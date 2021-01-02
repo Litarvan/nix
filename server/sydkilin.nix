@@ -11,6 +11,13 @@
   };
 
   networking = {
+    hostName = "sydkilin";
+
+    firewall = {
+      allowedTCPPorts = [ 80 443 2350 3450 ];
+      allowedUDPPorts = [ 2350 3450 ];
+    };
+
     defaultGateway = "45.90.162.65";
     defaultGateway6 = "fe80::921b:eff:fe0b:186";
 
