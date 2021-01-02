@@ -1,9 +1,7 @@
 { pkgs, lib, config, ... }:
 
 {
-  imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-  ];
+  imports = [ ./ ];
 
   boot = {
     initrd = {
@@ -27,11 +25,6 @@
   networking.hostName = "arkilin";
 
   hardware = {
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
-
     opengl.extraPackages = with pkgs; [ amdvlk ];
     video.hidpi.enable = true;
   };

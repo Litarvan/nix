@@ -1,9 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-  ];
+  imports = [ ./ ];
 
   boot = {
     initrd = {
@@ -24,12 +22,7 @@
 
   hardware = {
     bluetooth.enable = true;
-
-    pulseaudio = {
-      enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
-      package = pkgs.pulseaudioFull;
-    };
+    pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
 
     nvidia.prime = {
       sync.enable = true;
