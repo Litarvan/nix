@@ -36,6 +36,7 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
+  environment.systemPackages = with pkgs; [ firefox ];
 
   users.users.litarvan.extraGroups = [ "adbusers" "arangodb" "vboxusers" ];
 }

@@ -18,7 +18,7 @@
   programs.fish.enable = true;
   virtualisation.docker.enable = true;
 
-  environment.systemPackages = with pkgs; [ git firefox ];
+  environment.systemPackages = with pkgs; [ git ];
 
   nixpkgs.config.allowUnfree = true;
 }
