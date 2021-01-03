@@ -4,9 +4,13 @@ with lib;
 
 let
   cfg = config.services.epilink;
-  yamlFormat = pkgs.formats.yaml {};
 
-  configFile = pkgs.writeText "epilink.yml" (replaceStrings [ "\\\\" ] [ "\\" ] (builtins.toJSON cfg.config));
+  yamlFormat = pkgs.formats.yaml {};
+  configFile = pkgs.writeText "epilink.yml" (replaceStrings [ "\\\\" ] [ "\\" ] (builtins.toJSON (
+    ({ db = "${cfg.dataDir}/epilink.db"; }) // cfg.config
+  )));
+
+  package = pkgs.callPackage ../programs/epilink.nix {};
 in
 
 {
@@ -46,11 +50,11 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart = "${callPackage ../programs/epilink.nix}/bin/epilink-backend ${configFile}";
+        ExecStart = "${package}/bin/epilink-backend ${configFile}";
         User = "epilink";
         Group = "epilink";
         PermissionsStartOnly = true;
-        WorkingDirectory = "${cfg.dataDir}";
+        WorkingDirectory = "${package}";
       };
 
       preStart = ''
