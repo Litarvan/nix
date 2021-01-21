@@ -1,26 +1,19 @@
-with (import <nixpkgs> {});
-
-# { stdenv, pkgs, fetchFromGitHub, ... }:
+{ stdenv, pkgs, fetchurl, makeWrapper, ... }:
 
 stdenv.mkDerivation rec {
   pname = "epilink";
-  version = "0.6.1";
+  version = "0.6.1+deps_hotfix";
 
-  src = fetchFromGitHub {
-    repo = "EpiLink";
-    owner = "EpiLink";
-    rev = "v${version}";
-    sha256 = "0laf12a5skwgnxz589kibvc3hyasjq4gdx8m5bkv86dv9qs6kwgi";
+  src = fetchurl {
+    url = "https://github.com/EpiLink/EpiLink/releases/download/v${version}/epilink-backend-${version}.zip";
+    sha256 = "04x578d4vz3wgj7k70q6p7xqnki18hp76jky3jb1sqsrm0mbayrz";
   };
 
-  nativeBuildInputs = with pkgs; [ gradle unzip ];
+  nativeBuildInputs = with pkgs; [ unzip makeWrapper ];
   buildInputs = with pkgs; [ jdk14_headless ];
 
-  buildPhase = ''
-    gradle epilink-backend:distZip
-  '';
-
   installPhase = ''
-    unzip bot/distributions/epilink-backend-${version}.zip -d $out
+    cp -r ./ $out
+    wrapProgram $out/bin/epilink-backend --set JAVA_HOME ${pkgs.jdk14_headless}
   '';
 }
