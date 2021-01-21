@@ -2,7 +2,7 @@
 
 {
   imports = [
-    (modulesPath + "installer/scan/not-detected.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
     ../services/arangodb.nix
   ];
 
@@ -37,9 +37,10 @@
     steam.enable = true;
   };
 
-  virtualisation.virtualbox.host.enable = true;
+  # Broken on latest kernel
+  # virtualisation.virtualbox.host.enable = true;
 
   environment.systemPackages = with pkgs; [ firefox ];
 
-  users.users.litarvan.extraGroups = [ "adbusers" "arangodb" "vboxusers" ];
+  users.users.litarvan.extraGroups = [ "adbusers" "arangodb" ]; # "vboxusers"
 }

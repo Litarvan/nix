@@ -22,7 +22,12 @@
     };
   };
 
-  networking.hostName = "arkilin";
+  networking = {
+    hostName = "arkilin";
+
+    useDHCP = false;
+    interfaces.enp7s0.useDHCP = true;
+  };
 
   hardware = {
     opengl.extraPackages = with pkgs; [ amdvlk ];
@@ -39,17 +44,17 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/e4274476-758a-4157-9b46-2030f319e01d";
+      device = "/dev/disk/by-uuid/45d50d1e-97e6-4e70-8812-f1e6f1b91407";
       fsType = "ext4";
     };
 
     "/home" = {
-      device = "/dev/disk/by-uuid/21913d8e-e72c-4c1e-b50a-347b3444a367";
+      device = "/dev/disk/by-uuid/0832c528-687a-4d1b-9e8e-b2223cae86cb";
       fsType = "ext4";
     };
 
     "/efi" = {
-      device = "/dev/disk/by-uuid/73BC-4ABD";
+      device = "/dev/disk/by-uuid/5778-5A12";
       fsType = "vfat";
     };
   };
