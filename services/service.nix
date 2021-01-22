@@ -1,14 +1,12 @@
-{ name, description, package, command, args, options ? {} }:
-{ config, lib, ... }:
-
-with lib;
+params: { config, lib, pkgs, ... }: ({ name, description, package, command ? "", args ? cfg: "", options ? {} }:
 
 let
   cfg = config.services."${name}";
   desc = description;
   opts = options;
+  cmd = if command == "" then "bin/${name}" else command;
 in
-{
+with lib; {
 
   ###### interface
 
@@ -38,7 +36,7 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart = "${package}/${command} ${args cfg}";
+        ExecStart = "${package}/${cmd} ${args cfg}";
         User = name;
         Group = name;
         PermissionsStartOnly = true;
@@ -54,3 +52,5 @@ in
     };
   };
 }
+
+) (params { inherit lib pkgs; })
