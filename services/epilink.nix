@@ -1,13 +1,13 @@
-import ./service.nix ({ lib, pkgs }: {
+import ./service.nix ({ lib, pkgs }:
+
+{
   name = "epilink";
   description = "EpiLink backend server and Discord bot";
 
   package = pkgs.callPackage ../programs/epilink.nix {};
   command = "bin/epilink-backend";
 
-  args = cfg: pkgs.writeText "epilink.yml" (lib.replaceStrings [ "\\\\" ] [ "\\" ] (builtins.toJSON (
-    ({ db = "${cfg.dataDir}/epilink.db"; }) // cfg.config
-  )));
+  args = cfg: pkgs.writeText "epilink.yml" (lib.replaceStrings [ "\\\\" ] [ "\\" ] (builtins.toJSON cfg.config));
 
   options = {
     config = lib.mkOption {

@@ -15,7 +15,7 @@ with lib; {
       enable = mkEnableOption "Enable ${desc}";
       dataDir = mkOption {
         type = types.path;
-        default = "/var/db/${name}";
+        default = "/var/run/${name}";
         description = "Service data directory";
       };
     } // opts;
@@ -36,11 +36,10 @@ with lib; {
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart = "${package}/${cmd} ${args cfg}";
+        ExecStart = "${pkgs.bash}/bin/sh -c 'cd ${cfg.dataDir}; exec ${package}/${cmd} ${args cfg}'";
         User = name;
         Group = name;
         PermissionsStartOnly = true;
-        WorkingDirectory = "${package}";
       };
 
       preStart = ''

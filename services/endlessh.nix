@@ -1,4 +1,6 @@
-import ./service.nix ({ lib, pkgs }: {
+import ./service.nix ({ lib, pkgs }:
+
+{
   name = "endlessh";
   description = "SSH bot hell";
 
