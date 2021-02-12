@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/EpiLink/EpiLink/releases/download/v${version}/epilink-backend-${version}.zip";
-    sha256 = "04x578d4vz3wgj7k70q6p7xqnki18hp76jky3jb1sqsrm0mbayrz";
+    sha256 = "0q339g08nxqh2dyqf52hnm6sbnrb8cgb34p0fa41c9p3g2qgv0xd";
   };
 
   nativeBuildInputs = with pkgs; [ unzip makeWrapper ];
