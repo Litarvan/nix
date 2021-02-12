@@ -11,7 +11,7 @@ import ./service.nix ({ lib, pkgs }:
 
   options = {
     token = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "";
       description = "Discord bot token";
     };
