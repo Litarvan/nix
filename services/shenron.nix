@@ -2,18 +2,10 @@ import ./service.nix ({ lib, pkgs }:
 
 {
   name = "shenron";
-  description = "General purpose Discord bot";
+  description = "Shenron Discord bot";
 
   package = pkgs.callPackage ../programs/shenron.nix {};
   command = "bin/shenron";
 
-  args = cfg: cfg.token;
-
-  options = {
-    token = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-      description = "Discord bot token";
-    };
-  };
+  args = cfg: "$(${pkgs.coreutils}/bin/cat ./token)";
 })

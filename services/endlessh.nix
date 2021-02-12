@@ -2,7 +2,7 @@ import ./service.nix ({ lib, pkgs }:
 
 {
   name = "endlessh";
-  description = "SSH bot hell";
+  description = "Endlessh server";
 
   package = pkgs.endlessh;
 })
