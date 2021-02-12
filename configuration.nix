@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./local.nix # See local.example.nix
+    ./local # See local/default.example.nix
   ];
 
   console = {
