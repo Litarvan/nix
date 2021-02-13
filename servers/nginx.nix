@@ -23,20 +23,25 @@
     '';
 
     virtualHosts = if config.services.nginx.enable then import ../local/web.nix rec {
-      vhost = config: extra: ({
+      vhostWith = config: extra: ({
           http2 = true;
           enableACME = true;
           forceSSL = true;
           extraConfig = ''
               add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+              add_header X-Content-Type-Options "nosniff" always;
+              add_header X-Frame-Options "SAMEORIGIN" always;
+              add_header Referrer-Policy "no-referrer-when-downgrade" always;
+
               charset UTF-8;
 
               ${extra}
           '';
       } // config);
+      folderWith = path: extra: vhostWith { root = path; } extra;
+      proxyWith = address: extra: vhost { locations."/" = { proxyPass = address; extraConfig = extra; }; };
 
-      folderWith = path: extra: vhost { root = path; } extra;
-      proxyWith = address: extra: vhost { locations."/" = { proxyPass = address; extraConfig = extra; }; } "";
+      vhost = config: vhostWith config "";
       folder = path: folderWith path "";
       proxy = address: proxyWith address "";
     } else {};

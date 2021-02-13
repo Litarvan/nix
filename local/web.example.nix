@@ -1,6 +1,7 @@
 { vhost, folder, proxy, folderWith, proxyWith, ... }:
 
 # Copy this file to web.nix
+# Then add security.acme = { acceptTerms = true; email = "your email"; }; to local/default.nix
 
 {
   # "sub1.mydomain.com" = folder /var/www;;
