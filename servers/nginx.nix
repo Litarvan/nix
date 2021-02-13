@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   services.nginx = {
@@ -22,7 +22,7 @@
       add_header Expect-CT "max-age=0";
     '';
 
-    virtualHosts = import ../local/web.nix rec {
+    virtualHosts = if config.services.nginx.enable then import ../local/web.nix rec {
       vhost = config: extra: ({
           http2 = true;
           enableACME = true;
@@ -39,6 +39,6 @@
       proxyWith = address: extra: vhost { locations."/" = { proxyPass = address; extraConfig = extra; }; } "";
       folder = path: folder path "";
       proxy = address: proxy address "";
-    };
+    } else {};
   };
 }
