@@ -10,7 +10,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = with pkgs; [ unzip makeWrapper ];
-  buildInputs = with pkgs; [ jdk14_headless ];
 
   installPhase = ''
     cp -r ./ $out
