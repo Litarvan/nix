@@ -7,6 +7,7 @@
     ./services/arangodb.nix
     ./services/endlessh.nix
     ./services/epilink.nix
+    ./services/haste-server.nix
     ./services/shenron.nix
   ];
 
