@@ -3,6 +3,11 @@
 {
   imports = [
     ./local # See local/default.example.nix
+
+    ./services/arangodb.nix
+    ./services/endlessh.nix
+    ./services/epilink.nix
+    ./services/shenron.nix
   ];
 
   console = {
