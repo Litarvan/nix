@@ -37,8 +37,8 @@
 
       folderWith = path: extra: vhost { root = path; } extra;
       proxyWith = address: extra: vhost { locations."/" = { proxyPass = address; extraConfig = extra; }; } "";
-      folder = path: folder path "";
-      proxy = address: proxy address "";
+      folder = path: folderWith path "";
+      proxy = address: proxyWith address "";
     } else {};
   };
 }
