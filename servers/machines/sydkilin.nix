@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ./server.nix ];
+  imports = [ ../server.nix ];
 
   boot.loader.grub.device = "/dev/vda";
 
