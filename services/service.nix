@@ -15,7 +15,7 @@ with lib; {
       enable = mkEnableOption "Enable ${desc}";
       dataDir = mkOption {
         type = types.path;
-        default = "/var/run/${name}";
+        default = "/var/lib/${name}";
         description = "Service data directory";
       };
     } // opts;
