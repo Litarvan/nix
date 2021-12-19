@@ -20,6 +20,8 @@
       ssl_ecdh_curve secp384r1;
 
       add_header Expect-CT "max-age=0";
+
+      charset UTF-8;
     '';
 
     virtualHosts = if config.services.nginx.enable then import ../local/web.nix rec {
@@ -30,16 +32,19 @@
           extraConfig = ''
               add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
               add_header X-Content-Type-Options "nosniff" always;
-              add_header X-Frame-Options "DENY" always;
+              add_header X-Frame-Options "SAMEORIGIN" always;
               add_header Referrer-Policy "no-referrer-when-downgrade" always;
-
-              charset UTF-8;
 
               ${extra}
           '';
       } // config);
       folderWith = path: extra: vhostWith { root = path; } extra;
       proxyWith = address: extra: vhost { locations."/" = { proxyPass = address; extraConfig = extra; }; };
+
+      appFolder = path: vhost {
+        root = path;
+        locations."/" = { tryFiles = "$uri $uri/ /index.html"; };
+      };
 
       vhost = config: vhostWith config "";
       folder = path: folderWith path "";

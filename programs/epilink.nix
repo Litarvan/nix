@@ -2,17 +2,17 @@
 
 stdenv.mkDerivation rec {
   pname = "epilink";
-  version = "0.6.1+deps_hotfix";
+  version = "0.7.0-beta3";
 
   src = fetchurl {
     url = "https://github.com/EpiLink/EpiLink/releases/download/v${version}/epilink-backend-${version}.zip";
-    sha256 = "0q339g08nxqh2dyqf52hnm6sbnrb8cgb34p0fa41c9p3g2qgv0xd";
+    sha256 = "0dvpmnzfcqbav7zsr4ralcf8nhnd3y9bf9cvjwyf0b5hglbpibji";
   };
 
   nativeBuildInputs = with pkgs; [ unzip makeWrapper ];
 
   installPhase = ''
     cp -r ./ $out
-    wrapProgram $out/bin/epilink-backend --set JAVA_HOME ${pkgs.jdk14_headless}
+    wrapProgram $out/bin/epilink-backend --set JAVA_HOME ${pkgs.jdk17_headless}
   '';
 }

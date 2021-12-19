@@ -3,7 +3,8 @@
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    (modulesPath + "/profiles/hardened.nix")
+    # Breaks too much things
+    # (modulesPath + "/profiles/hardened.nix")
 
     ./nginx.nix
   ];
@@ -11,7 +12,9 @@
   boot = {
     loader.grub.splashImage = null;
 
-    kernelPackages = pkgs.linuxPackages_latest_hardened;
+    # Way too old
+    # kernelPackages = pkgs.linuxPackages_latest_hardened;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "xt_nat" ];
     kernelParams = [ "panic=1" "boot.panic_on_fail" ];
 
@@ -37,10 +40,18 @@
     ports = [ 18982 ];
     permitRootLogin = "no";
     passwordAuthentication = false;
+    # forwardX11 = true;
   };
 
+  # programs.ssh = {
+  #   forwardX11 = true;
+  #   setXAuthLocation = true;
+  # };
+
   environment = {
-    memoryAllocator.provider = "graphene-hardened";
-    noXlibs = true;
+    # Prevents dovecot2 from working :/
+    # memoryAllocator.provider = "graphene-hardened";
+    # memoryAllocator.provider = "libc";
+    # noXlibs = lib.mkForce true;
   };
 }

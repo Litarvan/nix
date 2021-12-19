@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     cp -r ./ $out
     wrapProgram $out/bin/shenron \
-        --set JAVA_HOME ${pkgs.jdk14_headless} \
-        --set SHENRON_OPTS "-Dkrobot.disableKeySaving=true -Dkrobot.disableAskingKey=true -Dkrobot.disableStateBar=true -Dkrobot.disableConsole=true -Dkrobot.disableColors=true"
+        --set JAVA_HOME ${pkgs.jre8_headless} \
+        --set SHENRON_OPTS "-Dkrobot.disableKeySaving=true -Dkrobot.disableAskingKey=true -Dkrobot.disableStateBar=true -Dkrobot.disableConsole=true -Dkrobot.disableColors=true -Dlog4j2.formatMsgNoLookups=true"
   '';
 }

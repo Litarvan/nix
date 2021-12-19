@@ -25,7 +25,10 @@ with lib; {
 
   config = mkIf cfg.enable {
     users = {
-      users."${name}".group = name;
+      users."${name}" = {
+        group = name;
+        isSystemUser = true;
+      };
       groups."${name}" = {};
     };
 
@@ -39,6 +42,8 @@ with lib; {
         ExecStart = "${pkgs.bash}/bin/sh -c 'cd ${cfg.dataDir}; exec ${package}/${cmd} ${args cfg}'";
         User = name;
         Group = name;
+        Restart = "on-failure";
+        RestartSec = "5s";
         PermissionsStartOnly = true;
       };
 

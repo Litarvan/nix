@@ -68,6 +68,7 @@ in
       group = "arangodb";
       uid = /*config.ids.uids.arangodb*/600;
       description = "ArangoDB server user";
+      isSystemUser = true;
     };
 
     users.extraGroups.arangodb.gid = /*config.ids.gids.arangodb*/600;
