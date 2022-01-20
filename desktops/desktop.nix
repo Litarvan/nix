@@ -3,7 +3,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../services/arangodb.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -23,24 +22,16 @@
       layout = "fr";
       xkbOptions = "eurosign:e";
 
-      libinput.enable = true;
-
-      displayManager.lightdm.enable = true;
+      displayManager.gdm.enable = true;
     };
 
     geoclue2.enable = true;
-    arangodb.enable = true;
   };
 
-  programs = {
-    adb.enable = true;
-    steam.enable = true;
-  };
+  programs.steam.enable = true;
 
-  # Broken on latest kernel
-  # virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.users.litarvan.extraGroups = [ "vboxusers" ];
 
   environment.systemPackages = with pkgs; [ firefox ];
-
-  users.users.litarvan.extraGroups = [ "adbusers" "arangodb" ]; # "vboxusers"
 }

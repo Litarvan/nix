@@ -5,13 +5,16 @@
 {
   imports = [
     # Kilin (my laptop)
-    # ./desktops/machines/kilin.nix
+    # ../desktops/machines/kilin.nix
     #
     # Arkilin (my desktop)
-    # ./desktops/machines/arkilin.nix
+    # ../desktops/machines/arkilin.nix
+    #
+    # Crilin (my desktop at the CRI)
+    # ../desktops/machines/crilin.nix
     #
     # Sydkilin (my server)
-    # ./servers/machines/sydkilin.nix 
+    # ../servers/machines/sydkilin.nix 
     
     # Web server
     # ./web.nix
